@@ -2,6 +2,7 @@ import React from "react";
 import { createUserWithEmailAndPassword, getAuth } from "firebase/auth";
 import { useState } from "react";
 import app from "../Firebase/firebase.init";
+import { Link } from "react-router-dom";
 
 const auth = getAuth(app);
 
@@ -106,6 +107,7 @@ const Login = () => {
           </button>
         )}
       </form>
+      <p>Already have an Account, Please <Link className='underline text-blue-400' to="/login">Login</Link></p>
       {
           success ? <p className="text-green-400">Form Submit Successfully</p> : ""
       }
