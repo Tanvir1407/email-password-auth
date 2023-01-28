@@ -1,5 +1,5 @@
 import React from "react";
-import { createUserWithEmailAndPassword, getAuth } from "firebase/auth";
+import { createUserWithEmailAndPassword, getAuth, sendEmailVerification } from "firebase/auth";
 import { useState } from "react";
 import app from "../Firebase/firebase.init";
 import { Link } from "react-router-dom";
@@ -40,6 +40,7 @@ const Login = () => {
             setSuccess(true);
             setSubmitError('')
             form.reset();
+            EmailVerification();
           })
           .catch(err => {
             setSubmitError(err.message);
@@ -54,6 +55,15 @@ const Login = () => {
   const checkboxHandle = (e) => {
     setCheck(e.target.checked);
   };
+
+  const EmailVerification = () => {
+    sendEmailVerification(auth.currentUser)
+      .then(() => {
+      alert("Please, Check your email and verify")
+    })
+  }
+
+
   return (
     <div className="mx-auto w-80">
       <form onSubmit={handleRegister}>
