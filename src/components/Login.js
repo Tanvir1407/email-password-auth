@@ -6,14 +6,20 @@ import app from "../Firebase/firebase.init";
 const auth = getAuth(app);
 
 const Login = () => {
-
+  
   const [check, setCheck] = useState(false);
   const [passwordError, setPasswordError] = useState(['']);
+  const [success, setSuccess] = useState(false); 
+  const [submitError, setSubmitError] = useState(['']);
 
+  
+  
   const handleRegister = (e) => {
-      e.preventDefault();
-        const email = e.target.email.value;
-        const password = e.target.password.value;
+    e.preventDefault();
+    const form = e.target;
+    const email = form.email.value;
+    const password = form.password.value;
+    
     if (!/(?=.*[A-Z].*[A-Z])/.test(password)) {
       setPasswordError('Please, add two uppercase letter');
       return;
@@ -29,14 +35,19 @@ const Login = () => {
     setPasswordError('');
       createUserWithEmailAndPassword(auth, email, password)
           .then(result => {
-              console.log(result);
+            console.log(result);
+            setSuccess(true);
+            setSubmitError('')
+            form.reset();
           })
           .catch(err => {
-              console.log(err);
+            setSubmitError(err.message);
           })
+    
+    setTimeout(() => {
+      setSuccess(false)
+    }, 6000);
 
-    e.target.email.value = "";
-    e.target.password.value = "";
   };
   
   const checkboxHandle = (e) => {
@@ -48,6 +59,9 @@ const Login = () => {
         <h1 className="text-3xl text-cyan-500 font-semibold my-4">
           Please Register..!!!
         </h1>
+        {
+          success ? <p className="text-green-400">Form Submit Successfully</p> : ""
+        }
         <input
           className="my-3 border-2 min-w-full border-gray-500 rounded p-2 m-1"
           type="email"
@@ -55,7 +69,9 @@ const Login = () => {
           name="email"
           id=""
           required
-        />{" "}
+        />
+        {<p className="text-red-500"> {submitError }</p> }
+
         <br />
         <input
           className="my-3  border-2 min-w-full border-gray-500 rounded p-2 m-1"
