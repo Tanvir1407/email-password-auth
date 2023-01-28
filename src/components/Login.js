@@ -54,14 +54,12 @@ const Login = () => {
     setCheck(e.target.checked);
   };
   return (
-    <div className="mx-auto w-1/3">
+    <div className="mx-auto w-80">
       <form onSubmit={handleRegister}>
         <h1 className="text-3xl text-cyan-500 font-semibold my-4">
           Please Register..!!!
         </h1>
-        {
-          success ? <p className="text-green-400">Form Submit Successfully</p> : ""
-        }
+        
         <input
           className="my-3 border-2 min-w-full border-gray-500 rounded p-2 m-1"
           type="email"
@@ -70,7 +68,7 @@ const Login = () => {
           id=""
           required
         />
-        {<p className="text-red-500"> {submitError }</p> }
+        
 
         <br />
         <input
@@ -81,7 +79,7 @@ const Login = () => {
           id=""
           required  
         />
-        <p className="text-red-300">{passwordError }</p>
+      
         <br />
         <label className="m-2" htmlFor="check">
           <input onClick={checkboxHandle} type="checkbox" name="check" id="" />{" "}
@@ -93,14 +91,14 @@ const Login = () => {
         </label>
         {check  ? (
           <button
-            className="my-3   bg-green-400 px-12 min-w-full font-bold hover:bg-green-600 text-white duration-500 rounded-md py-2 "
+            className="my-2  bg-green-400 px-12 min-w-full font-bold hover:bg-green-600 text-white duration-500 rounded-md py-2 "
             type="submit"
           >
             Registration
           </button>
         ) : (
           <button
-            className=" my-3 text-gray-500  bg-gray-300 px-12 min-w-full font-bold duration-500 rounded-md py-2"
+            className=" my-2 text-gray-500  bg-gray-300 px-12 min-w-full font-bold duration-500 rounded-md py-2"
             type="submit"
             disabled
           >
@@ -108,6 +106,11 @@ const Login = () => {
           </button>
         )}
       </form>
+      {
+          success ? <p className="text-green-400">Form Submit Successfully</p> : ""
+      }
+      <p className="text-red-300">{passwordError}</p>
+      <p className="text-red-500"> {submitError }</p> 
     </div>
   );
 };
