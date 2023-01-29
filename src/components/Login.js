@@ -121,7 +121,7 @@ const Login = () => {
       {
           success ? <p className="text-green-400">Form Submit Successfully</p> : ""
       }
-      <p className="text-red-300">{passwordError}</p>
+      <p className="text-red-500">{passwordError}</p>
       <p className="text-red-500"> {submitError }</p> 
     </div>
   );

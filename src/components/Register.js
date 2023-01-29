@@ -25,17 +25,7 @@ const Register = () => {
             setSuccess(false)
         },3000)
     }
-    const handleForgetPassword = () => {
-        const Email = prompt("To Send reset password link, Enter Email: ");
-        console.log(Email)
-        sendPasswordResetEmail(auth, Email)
-            .then(result => {
-                console.log(result);
-            })
-            .catch(err => {
-                console.log(err.message)
-        })
-    }
+    
     return (
         <div className='mx-auto w-80'>
             <h1 className='text-center mb-6 text-3xl font-semibold text-cyan-500'>Hello there, Please Login</h1>
@@ -44,7 +34,7 @@ const Register = () => {
                 <input name="password" className='border w-full border-gray-800 p-2 my-2 rounded' placeholder='Enter Your Password' type="password" /><br />
                 <button className='my-2 px-10 py-2 w-full font-bold rounded bg-cyan-400 hover:bg-cyan-500 duration-500' type="submit">Login</button>
                 <div className='flex justify-between'>
-                    <p onClick={handleForgetPassword} className='text-blue-500 cursor-pointer'>Forgot Password</p>
+                    <Link to="/ForgetPassword" className='text-blue-500 cursor-pointer'>Forgot Password</Link>
                     <p className='text-blue-500 cursor-pointer'>Change Password</p>
                 </div>
             </form>
