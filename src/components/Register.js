@@ -1,4 +1,4 @@
-import { getAuth, sendPasswordResetEmail, signInWithEmailAndPassword } from 'firebase/auth';
+import { getAuth, signInWithEmailAndPassword} from 'firebase/auth';
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import app from '../Firebase/firebase.init';
@@ -25,6 +25,9 @@ const Register = () => {
             setSuccess(false)
         },3000)
     }
+        
+    
+    
     
     return (
         <div className='mx-auto w-80'>

@@ -1,5 +1,5 @@
 import React from "react";
-import { createUserWithEmailAndPassword, getAuth, sendEmailVerification } from "firebase/auth";
+import { createUserWithEmailAndPassword, getAuth, sendEmailVerification, updateProfile } from "firebase/auth";
 import { useState } from "react";
 import app from "../Firebase/firebase.init";
 import { Link } from "react-router-dom";
@@ -19,6 +19,7 @@ const Login = () => {
     e.preventDefault();
     const form = e.target;
     const email = form.email.value;
+    const name = form.name.value;
     const password = form.password.value;
     
     if (!/(?=.*[A-Z].*[A-Z])/.test(password)) {
@@ -41,6 +42,7 @@ const Login = () => {
             setSubmitError('')
             form.reset();
             EmailVerification();
+            handleUpdateUserName(name);
           })
           .catch(err => {
             setSubmitError(err.message);
@@ -62,6 +64,18 @@ const Login = () => {
       alert("Please, Check your email and verify")
     })
   }
+  // Update User Name
+  const handleUpdateUserName = (name) => {
+    updateProfile(auth.currentUser, {
+      displayName: name
+    })
+      .then(() => {
+        console.log('User Name Update');
+      })
+      .catch((err) => {
+        console.log(err)
+    })
+  }
 
 
   return (
@@ -71,6 +85,14 @@ const Login = () => {
           Please Register..!!!
         </h1>
         
+        <input
+          className="my-3 border-2 min-w-full border-gray-500 rounded p-2 m-1"
+          type="text"
+          placeholder="Enter Your Name"
+          name="name"
+          id=""
+          required
+        />
         <input
           className="my-3 border-2 min-w-full border-gray-500 rounded p-2 m-1"
           type="email"

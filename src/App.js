@@ -6,13 +6,15 @@ import Register from "./components/Register";
 
 
 function App() {
-  
+
   return (
     <>
-      <nav>
-        <Link to="/login">Login</Link>
-        <Link to="/register">Register</Link>
-      </nav>
+      <div>
+         <nav>
+            <Link to="/login">Login</Link>
+            <Link to="/register">Register</Link>
+        </nav>
+     </div>
       <Routes>
         <Route path="/login" element={ <Register></Register>} />
         <Route path="/register" element={<Login></Login> } />
