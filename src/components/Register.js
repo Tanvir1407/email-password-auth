@@ -1,4 +1,4 @@
-import { getAuth, signInWithEmailAndPassword } from 'firebase/auth';
+import { getAuth, sendPasswordResetEmail, signInWithEmailAndPassword } from 'firebase/auth';
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import app from '../Firebase/firebase.init';
@@ -25,6 +25,17 @@ const Register = () => {
             setSuccess(false)
         },3000)
     }
+    const handleForgetPassword = () => {
+        const Email = prompt("To Send reset password link, Enter Email: ");
+        console.log(Email)
+        sendPasswordResetEmail(auth, Email)
+            .then(result => {
+                console.log(result);
+            })
+            .catch(err => {
+                console.log(err.message)
+        })
+    }
     return (
         <div className='mx-auto w-80'>
             <h1 className='text-center mb-6 text-3xl font-semibold text-cyan-500'>Hello there, Please Login</h1>
@@ -32,6 +43,10 @@ const Register = () => {
                 <input name="email" className='border w-full border-gray-800 p-2 my-2 rounded' placeholder='Enter Your Email' type="email" /> <br />
                 <input name="password" className='border w-full border-gray-800 p-2 my-2 rounded' placeholder='Enter Your Password' type="password" /><br />
                 <button className='my-2 px-10 py-2 w-full font-bold rounded bg-cyan-400 hover:bg-cyan-500 duration-500' type="submit">Login</button>
+                <div className='flex justify-between'>
+                    <p onClick={handleForgetPassword} className='text-blue-500 cursor-pointer'>Forgot Password</p>
+                    <p className='text-blue-500 cursor-pointer'>Change Password</p>
+                </div>
             </form>
             <p className='mx-2 text-gray-500'>New to Website, Please <Link className=' underline text-blue-400' to="/register">Register </Link></p>
         </div>
